@@ -1,0 +1,11 @@
+@import "../styles/index.scss";
+
+.header {
+  background-color: #404040;
+  padding: 1rem;
+  a {
+    color: white;
+    font-weight: bold;
+    text-decoration: none;
+  }
+}
