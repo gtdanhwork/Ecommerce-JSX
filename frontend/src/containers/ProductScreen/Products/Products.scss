@@ -1,0 +1,21 @@
+@import "../../../styles/index.scss";
+
+.products {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+
+  .product {
+    border: 1px solid black;
+    margin: 1rem;
+
+    img {
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .productInfo {
+      padding: 1rem;
+    }
+  }
+}
