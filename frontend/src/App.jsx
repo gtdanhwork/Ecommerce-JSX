@@ -1,12 +1,9 @@
 import AppRouters from "./AppRouters";
-import Header from "./components/Header";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   return (
     <div className="App">
-      <div className="header">
-        <Header />
-      </div>
       <div className="appRouters">
         <AppRouters />
       </div>
