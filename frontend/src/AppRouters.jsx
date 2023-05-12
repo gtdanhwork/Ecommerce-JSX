@@ -12,7 +12,7 @@ function AppRouters() {
       <div className="d-flex flex-column sideContainer">
         <Header />
         <div className="main">
-          <Container>
+          <Container className="mt-3">
             <Routes>
               <Route path="/" element={<Homescreen />} />
               <Route path="/product/:slug" element={<ProductScreen />} />

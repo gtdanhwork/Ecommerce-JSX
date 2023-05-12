@@ -1,26 +1,15 @@
 import React, { useEffect, useReducer } from "react";
 import Products from "./Products/Products";
+import { ProductListReducer } from "../Reducer/reducer";
 import logger from "use-reducer-logger";
 // import data from "../../data";
 import axios from "axios";
 
 import "../Homescreen/Homescreen.scss";
-
-const reducer = (state, action) => {
-  switch (action.type) {
-    case "FETCH_REQUEST":
-      return { ...state, loading: true };
-    case "FETCH_SUCCESS":
-      return { ...state, products: action.payload, loading: false };
-    case "FETCH_FAIL":
-      return { ...state, error: action.payload, loading: false };
-    default:
-      return state;
-  }
-};
+import { Helmet } from "react-helmet-async";
 
 function Homescreen() {
-  const [{ loading, error, products }, dispatch] = useReducer(logger(reducer), {
+  const [{ loading, error, products }, dispatch] = useReducer(logger(ProductListReducer), {
     products: [],
     loading: true,
     error: "",
@@ -40,6 +29,9 @@ function Homescreen() {
   }, []);
   return (
     <div className="homeScreen">
+      <Helmet>
+        <title>Amazona</title>
+      </Helmet>
       <div className="mainProducts">
         <h1>Featured Products</h1>
         {loading ? <div>Loading...</div> : error ? <div>{error}</div> : <Products products={products} />}
