@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 
 function Products(props) {
   const { products } = props;
+
   return (
     <div className="products">
       <Row>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
@@ -6,9 +6,16 @@ import Badge from "react-bootstrap/Badge";
 import ListGroup from "react-bootstrap/ListGroup";
 import { Button, Rate } from "antd";
 import { Helmet } from "react-helmet-async";
+import { Store } from "../../../Store";
 
 function ProductInfo(props) {
   const { product } = props;
+
+  const { state, dispatch: ctxDispatch } = useContext(Store);
+
+  const addToCartHandler = () => {
+    ctxDispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity: 1 } });
+  };
 
   return (
     <Row>
@@ -32,7 +39,7 @@ function ProductInfo(props) {
           </ListGroup.Item>
         </ListGroup>
       </Col>
-      <Col md={2}>
+      <Col md={3}>
         <Card>
           <Card.Body>
             <ListGroup variant="flush">
@@ -57,7 +64,9 @@ function ProductInfo(props) {
               {product.countInStock > 0 && (
                 <ListGroup.Item>
                   <div className="d-grid">
-                    <Button type="primary">Add to Cart</Button>
+                    <Button onClick={addToCartHandler} type="primary">
+                      Add to Cart
+                    </Button>
                   </div>
                 </ListGroup.Item>
               )}

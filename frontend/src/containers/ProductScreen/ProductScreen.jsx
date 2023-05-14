@@ -5,6 +5,9 @@ import axios from "axios";
 import ProductInfo from "./ProductInfo/ProductInfo";
 
 import "../ProductScreen/ProductScreen.scss";
+import Loading from "../../components/Loading/Loading";
+import { MessageBoxs } from "../../utils/MessageBoxs/MessageBoxs";
+import { getError } from "../../utils/getError/getError";
 
 function ProductScreen() {
   const params = useParams();
@@ -23,7 +26,7 @@ function ProductScreen() {
         const result = await axios.get(`/api/products/slug/${slug}`);
         dispatch({ type: "FETCH_SUCCESS", payload: result.data });
       } catch (err) {
-        dispatch({ type: "FETCH_FAIL", payload: err.message });
+        dispatch({ type: "FETCH_FAIL", payload: getError(err) });
       }
     };
     fetchData();
@@ -32,9 +35,11 @@ function ProductScreen() {
   return (
     <div className="product">
       {loading ? (
-        <div className="loading">Loading</div>
+        <div>
+          <Loading />
+        </div>
       ) : error ? (
-        <div className="error">Error</div>
+        <MessageBoxs message={error} type="error" />
       ) : (
         <ProductInfo product={product} />
       )}

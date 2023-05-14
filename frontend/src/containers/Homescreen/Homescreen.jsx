@@ -7,6 +7,8 @@ import axios from "axios";
 
 import "../Homescreen/Homescreen.scss";
 import { Helmet } from "react-helmet-async";
+import Loading from "../../components/Loading/Loading";
+import { MessageBoxs } from "../../utils/MessageBoxs/MessageBoxs";
 
 function Homescreen() {
   const [{ loading, error, products }, dispatch] = useReducer(logger(ProductListReducer), {
@@ -14,7 +16,6 @@ function Homescreen() {
     loading: true,
     error: "",
   });
-  // const [products, setProducts] = useState([]);
   useEffect(() => {
     const fetchData = async () => {
       dispatch({ type: "FETCH_REQUEST" });
@@ -34,7 +35,15 @@ function Homescreen() {
       </Helmet>
       <div className="mainProducts">
         <h1>Featured Products</h1>
-        {loading ? <div>Loading...</div> : error ? <div>{error}</div> : <Products products={products} />}
+        {loading ? (
+          <div>
+            <Loading />
+          </div>
+        ) : error ? (
+          <MessageBoxs message={error} type="error" />
+        ) : (
+          <Products products={products} />
+        )}
       </div>
     </div>
   );
