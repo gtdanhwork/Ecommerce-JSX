@@ -8,7 +8,7 @@ import axios from "axios";
 import "../Homescreen/Homescreen.scss";
 import { Helmet } from "react-helmet-async";
 import Loading from "../../components/Loading/Loading";
-import { MessageBoxs } from "../../utils/MessageBoxs/MessageBoxs";
+import { MessageBox } from "../../utils/MessageBox/MessageBox";
 
 function Homescreen() {
   const [{ loading, error, products }, dispatch] = useReducer(logger(ProductListReducer), {
@@ -40,9 +40,9 @@ function Homescreen() {
             <Loading />
           </div>
         ) : error ? (
-          <MessageBoxs message={error} type="error" />
+          <MessageBox message={error} type="error" />
         ) : (
-          <Products products={products} />
+          <Products product={products} />
         )}
       </div>
     </div>

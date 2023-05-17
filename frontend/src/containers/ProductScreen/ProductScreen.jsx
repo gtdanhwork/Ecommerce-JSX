@@ -6,7 +6,7 @@ import ProductInfo from "./ProductInfo/ProductInfo";
 
 import "../ProductScreen/ProductScreen.scss";
 import Loading from "../../components/Loading/Loading";
-import { MessageBoxs } from "../../utils/MessageBoxs/MessageBoxs";
+import { MessageBox } from "../../utils/MessageBox/MessageBox";
 import { getError } from "../../utils/getError/getError";
 
 function ProductScreen() {
@@ -39,7 +39,7 @@ function ProductScreen() {
           <Loading />
         </div>
       ) : error ? (
-        <MessageBoxs message={error} type="error" />
+        <MessageBox message={error} type="error" />
       ) : (
         <ProductInfo product={product} />
       )}

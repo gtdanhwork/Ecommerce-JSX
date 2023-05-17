@@ -5,6 +5,7 @@ import ProductScreen from "./containers/ProductScreen/ProductScreen";
 import Header from "./components/Header/Header";
 import Container from "react-bootstrap/Container";
 import Footer from "./components/Footer/Footer";
+import CartScreen from "./containers/CartScreen/CartScreen";
 
 function AppRouters() {
   return (
@@ -16,6 +17,7 @@ function AppRouters() {
             <Routes>
               <Route path="/" element={<Homescreen />} />
               <Route path="/product/:slug" element={<ProductScreen />} />
+              <Route path="/cart" element={<CartScreen />} />
             </Routes>
           </Container>
         </div>

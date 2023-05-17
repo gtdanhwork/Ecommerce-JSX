@@ -1,4 +1,5 @@
 import React, { useContext } from "react";
+import axios from "axios";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import Card from "react-bootstrap/Card";
@@ -7,14 +8,26 @@ import ListGroup from "react-bootstrap/ListGroup";
 import { Button, Rate } from "antd";
 import { Helmet } from "react-helmet-async";
 import { Store } from "../../../Store";
+import { useNavigate } from "react-router-dom";
 
 function ProductInfo(props) {
   const { product } = props;
 
   const { state, dispatch: ctxDispatch } = useContext(Store);
+  const { cart } = state;
 
-  const addToCartHandler = () => {
-    ctxDispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity: 1 } });
+  const navigate = useNavigate();
+
+  const addToCartHandler = async () => {
+    const existItem = cart.cartItems.find((x) => x._id === product._id);
+    const quantity = existItem ? existItem.quantity + 1 : 1;
+    const { data } = await axios.get(`/api/products/${product._id}`);
+    if (data.countInStock < quantity) {
+      window.alert("Product is out of stock");
+      return;
+    }
+    ctxDispatch({ type: "CART_ADD_ITEM", payload: { ...product, quantity } });
+    navigate("/cart");
   };
 
   return (
